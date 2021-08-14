@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Dogs from '@/components/Dogs'
-import TodoList from '@/components/TodoList'
 
 Vue.use(Router)
 
@@ -10,12 +8,22 @@ export default new Router({
     {
       path: '/',
       name: 'TodoList',
-      component: TodoList
+      component: () => import('../components/TodoList.vue')
     },
     {
       path: '/dogs',
       name: 'Dogs',
-      component: Dogs
+      component: () => import('../components/Dogs.vue')
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import('../components/Login.vue')
+    },
+    {
+      path: '/api/list',
+      name: 'ListApi',
+      component: () => import('../components/ListApi.vue')
     }
   ]
 })

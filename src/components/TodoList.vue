@@ -2,9 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-12 py-5">
-        <h1>{{ listName }}</h1>
+        <h1>TodoList</h1>
       </div>
     </div>
+    <router-link to="/login">Login</router-link>
     <div class="row mb-3">
       <create-todo @on-new-todo="addTodo($event)" />
     </div>
@@ -31,9 +32,6 @@ import Todo from "./Todo.vue";
 import CreateTodo from "./CreateTodo.vue";
 
 export default {
-  props: {
-    listName: String
-  },
   data() {
     return {
       todos: [

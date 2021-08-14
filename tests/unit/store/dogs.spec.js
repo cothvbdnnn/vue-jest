@@ -10,6 +10,7 @@ describe('Dogs', () => {
       { name: "blackie", breed: "poodle", age: 4 }
     ]
   }
+
   const newDog = { name: 'hi', breed: 'hi', age: 3 }
 
   it('TEST CASE 1: Get poodle', () => {

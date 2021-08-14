@@ -1,39 +1,29 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import Dogs from '@/components/Dogs'
+import DogsComponent from '@/components/Dogs'
+import dogs from '@/store/modules/dogs'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
+const state = {
+  dogs: [
+    { name: "test", breed: "poodle", age: 1 },
+  ]
+}
+
 const store = new Vuex.Store({
   modules: {
-    dogs: {
-      namespaced: true,
-      state: {
-        dogs: [
-          { name: "lucky", breed: "poodle", age: 1 },
-          { name: "pochy", breed: "dalmatian", age: 2 },
-          { name: "blackie", breed: "poodle", age: 4 }
-        ]
-      },
-      getters: {
-        poodles: (state) => {
-          return state.dogs.filter(dog => dog.breed === "poodle")
-        }
-      },
-      mutations: {
-        SET_DOG() {}
-      },
-      actions: {
-        setDog() {}
-      }
+    dogs: { 
+      ...dogs, 
+      state 
     }
   }
 })
 
 let wrapper
 beforeEach(() => {
-  wrapper = shallowMount(Dogs, { 
+  wrapper = shallowMount(DogsComponent, { 
     store, 
     localVue
   })
@@ -44,17 +34,18 @@ afterEach(() => {
 })
 
 describe('Dogs', () => {
-  it('TEST CASE 1: Render poodles', () => {
-    expect(wrapper.find('ul').text()).toEqual('luckyblackie')
+  it('Render poodles', () => {
+    expect(wrapper.find('ul').text()).toEqual('test')
   })
-  it('TEST CASE 2: Add dog with form has empty value', () => {
+  it('Add dog with form has empty value', () => {
+    const dispatch = jest.spyOn(DogsComponent.methods, 'setDog')
     wrapper.find('form').trigger('submit.prevent')
-    // expect(store.dispatch('setDog')).toBeUndefined()
+    expect(dispatch).toHaveBeenCalledTimes(0)
   })
-  it('TEST CASE 3: Add dog with form has value', async () => {
-    const dispatch = jest.spyOn(Dogs.methods, 'setDog')
-    const commit = jest.spyOn(Dogs.methods, 'SET_DOG')
-    wrapper = shallowMount(Dogs, {
+  it('Add dog with form has value', async () => {
+    const dispatch = jest.spyOn(DogsComponent.methods, 'setDog')
+    const commit = jest.spyOn(DogsComponent.methods, 'SET_DOG')
+    wrapper = shallowMount(DogsComponent, {
       store, 
       localVue
     })
@@ -74,26 +65,3 @@ describe('Dogs', () => {
     expect(wrapper.vm.newDog).toEqual('')
   })
 })
-
-
-// import { shallowMount } from '@vue/test-utils'
-// import Dogs from '@/components/Dogs'
-
-// let wrapper
-// beforeEach(() => {
-//   wrapper = shallowMount(Dogs, { 
-//     mocks: {
-//       namespaced: true,
-//       $store: {
-//         state: { }
-//       }
-//     }
-//   })
-// })
-
-// afterEach(() => {
-//   wrapper.destroy()
-// })
-
-// it("renders a username using a mock store", () => {
-// })

@@ -2,7 +2,7 @@ import { shallowMount } from "@vue/test-utils"
 import TodoList from '@/components/TodoList'
 import Todo from '@/components/Todo'
 
-describe('Test TodoList', () => {
+describe('TodoList', () => {
 
   let wrapper
   beforeEach(() => {
@@ -13,7 +13,7 @@ describe('Test TodoList', () => {
     wrapper.destroy()
   })
 
-  it('TEST CASE 1: Renders title', () => {
+  it('Render the title', () => {
     const listName = 'Title'
     wrapper = shallowMount(TodoList, {
       propsData: {
@@ -22,11 +22,11 @@ describe('Test TodoList', () => {
     })
     expect(wrapper.find('h1').text()).toContain(listName)
   })
-  it('TEST CASE 2: Renders a lists', () => {
+  it('Render a list', () => {
     const wrapper = shallowMount(TodoList)
     expect(wrapper.findAllComponents(Todo).length).toBe(3)
   })
-  it('TEST CASE 3: Delete todo', async () => {
+  it('Delete todo', async () => {
     const obj = {
       description: "Do it",
       completed: false
@@ -41,16 +41,16 @@ describe('Test TodoList', () => {
     await wrapper.vm.deleteTodo(obj)
     expect(wrapper.find('ul').html()).not.toContain(obj.description)
   })
-  it('TEST CASE 4: Add todo', async () => {
+  it('Add todo', async () => {
     const newTodo = 'new'
     await wrapper.vm.addTodo(newTodo)
     expect(wrapper.find('ul').html()).toContain(newTodo)
   })
-  it('TEST CASE 5: Toggle Todo', () => {
+  it('Toggle Todo', () => {
     wrapper.vm.toggleTodo(wrapper.vm.todos[0])
     expect(wrapper.vm.todos[0].completed).toBe(true)
   })
-  it('TEST CASE 6: Edit Todo', () => {
+  it('Edit Todo', () => {
     const newDes = 'test'
     wrapper.vm.editTodo(wrapper.vm.todos[0], newDes)
     expect(wrapper.vm.todos[0].description).toEqual(newDes)

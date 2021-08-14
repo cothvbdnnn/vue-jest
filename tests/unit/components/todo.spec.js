@@ -1,40 +1,43 @@
 import { shallowMount } from "@vue/test-utils";
 import Todo from '@/components/Todo'
 
-
-describe('Test Todo', () => {
-
+describe('Todo', () => {
   const description = 'Do it'
   let wrapper
+  const config = {
+    propsData: {
+      description: description
+    }
+  }
   beforeEach(() => {
-    wrapper = shallowMount(Todo, {
-      propsData: {
-        description: description
-      }
-    })
+    wrapper = shallowMount(Todo, config)
   })
 
   afterEach(() => {
     wrapper.destroy()
   })
 
-  it('TEST CASE 1: Is a todo', () => {
+  it('Is a todo', () => {
     expect(wrapper.vm).toBeTruthy()
   })
-  it('TEST CASE 2: Render the todo', () => {
+  it('Render the todo', () => {
     expect(wrapper.find('.des').text()).toContain(description)
   })
-  it('TEST CASE 3: Emit event when button remove is clicked', () => {
+  it('Emit event when button remove is clicked', () => {
     wrapper.find('.btn-remove').trigger('click')
     expect(wrapper.emitted('on-delete')).toBeTruthy()
   })
-  it('TEST CASE 4: Start edit when button edit is clicked', async () => {
+  it('Toggle form when button edit is clicked', async () => {
+    const fn = jest.spyOn(Todo.methods, 'finishEditing')
+    wrapper = shallowMount(Todo, config)
     await wrapper.find('.btn-edit').trigger('click')
     const form = wrapper.find("form")
     expect(form.exists()).toBe(true)
     expect(wrapper.vm.newTodoDescription).toBe(description)
+    await wrapper.find('.btn-edit').trigger('click')
+    expect(fn).toHaveBeenCalled()
   })
-  it('TEST CASE 5: Finish edit when submit', async () => {
+  it('Finish edit when submit', async () => {
     await wrapper.find('.btn-edit').trigger('click')
     const form = wrapper.find("form")
     expect(form.exists()).toBe(true)

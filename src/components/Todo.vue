@@ -48,11 +48,6 @@ export default {
     description: String,
     completed: Boolean
   },
-  computed: {
-    capText() {
-      return this.newTodoDescription.toUpperCase()
-    }
-  },
   methods: {
     startEditing() {
       if (this.isEditing) {
