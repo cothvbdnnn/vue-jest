@@ -9,7 +9,7 @@
         v-model="formLogin.password"
         type="password"
       />
-      <el-button :loading="loading" type="primary" @click="onSubmit">
+      <el-button :loading="loading" class="submit" type="primary" @click.native="onSubmit()">
         Sign In
       </el-button>
     </el-form>
@@ -32,15 +32,15 @@ export default {
   methods: {
     async onSubmit() {
       this.loading = true;
-      const signIn = await axios
-        .post("auth/signin", this.formLogin)
-        .catch(() => {
+      try {
+        const signIn = await axios.post("auth/signin", this.formLogin)
+        localStorage.setItem("userEmail", `${signIn.data.email}`);
+        Cookies.set(AUTH_TOKEN, signIn.data.auth_token);
+        this.loading = false;
+        this.$router.push("api/list");
+      } catch (error) {
           this.loading = false;
-        });
-      localStorage.setItem("userEmail", `${signIn.data.email}`);
-      Cookies.set(AUTH_TOKEN, signIn.data.auth_token);
-      this.loading = false;
-      this.$router.push("api/list");
+      }
     },
   },
 };

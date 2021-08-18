@@ -1,17 +1,25 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import CreateTodo from '@/components/CreateTodo'
+import VueRouter from 'vue-router'
 
+const localVue = createLocalVue()
+localVue.use(VueRouter)
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/dogs',
+      name: 'Dogs',
+      component: () => import('@/components/Dogs.vue')
+    }
+  ]
+})
 describe('Test CreateTodo', () => {
 
   let wrapper
   beforeEach(() => {
     wrapper = shallowMount(CreateTodo, {
-      stubs: ['router-link'],
-      mocks: {
-        $router: {
-          push: jest.fn()
-        }
-      }
+      localVue,
+      router
     })
   })
 
@@ -36,9 +44,9 @@ describe('Test CreateTodo', () => {
     expect(wrapper.emitted('on-new-todo')[0][0]).toEqual(newValue)
     expect(wrapper.vm.newTodo).toEqual('')
   })
-  it('TEST CASE 3: Push route', () => {
-    wrapper.find('.link-test').trigger('click')
-    const pushFn = jest.spyOn(wrapper.vm.$router, 'push')
-    expect(pushFn).toHaveBeenCalledWith({ name: 'Dogs'} )
+  it('TEST CASE 3: Push route', async () => {
+    const link = wrapper.find('.link-test')
+    await link.trigger('click')
+    expect(wrapper.vm.$route.path).toBe('/dogs')
   })
 })

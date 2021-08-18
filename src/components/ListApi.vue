@@ -94,30 +94,15 @@ export default {
   beforeMount() {
     this.getData();
     addEventListener("loadTodo", this.getData);
+    addEventListener("detailEdit", this.updateTitle);
     this.$on("hook:beforeDestroy", () => {
       removeEventListener("loadTodo", this.getData);
-    });
-    addEventListener("detailEdit", this.updateTitle);
-    addEventListener("detailEditGlobal", this.updateTitleGlobal);
-    this.$on("hook:beforeDestroy", () => {
       removeEventListener("detailEdit", this.updateTitle);
-      addEventListener("detailEditGlobal", this.updateTitleGlobal);
     });
   },
   methods: {
-    submitEditGlobal() {
-      this.editGlobal(this.itemGlobal);
-      this.itemGlobal = {};
-    },
-    submitAddGlobal() {
-      this.addGlobal(this.titleGlobal);
-      this.titleGlobal = "";
-    },
     updateTitle(event) {
       this.formEditTodo = event.detail;
-    },
-    updateTitleGlobal(event) {
-      this.itemGlobal = event.detail;
     },
     async submitFormAddTodo() {
       this.loadingCreate = true;
@@ -137,19 +122,6 @@ export default {
       dispatchEvent(new CustomEvent("loadTodo"));
       this.formEditTodo.title = "";
       this.loadingEdit = false;
-    },
-    handleRemoveGlobal(index) {
-      this.removeGlobal(index);
-    },
-    handleEditGlobal(title, index) {
-      dispatchEvent(
-        new CustomEvent("detailEditGlobal", {
-          detail: {
-            title: title,
-            index: index,
-          },
-        })
-      );
     },
     async getData() {
       const params = {

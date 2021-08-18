@@ -6,6 +6,7 @@
       </div>
     </div>
     <router-link to="/login">Login</router-link>
+    <router-view></router-view>
     <div class="row mb-3">
       <create-todo @on-new-todo="addTodo($event)" />
     </div>

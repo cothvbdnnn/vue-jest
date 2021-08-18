@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
+      <div v-if="test">hi</div>
       <div class="col-12 py-5">
           <h1>Dogs</h1>
       </div>
@@ -34,7 +35,8 @@ export default {
   name: "Dogs",
   data() {
     return {
-      newDog: ''
+      newDog: '',
+      test: true
     }
   },
   computed: {

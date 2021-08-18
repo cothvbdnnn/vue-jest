@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1628913860722" clover="3.2.0">
-  <project timestamp="1628913860723" name="All files">
-    <metrics statements="9" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0" elements="16" coveredelements="4" complexity="0" loc="9" ncloc="9" packages="1" files="1" classes="1"/>
-    <file name="dogs.js" path="/home/thanhnguyen/bizfly/vue-jest/src/store/modules/dogs.js">
-      <metrics statements="9" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
-      <line num="1" count="1" type="stmt"/>
-      <line num="9" count="1" type="stmt"/>
-      <line num="11" count="0" type="stmt"/>
-      <line num="13" count="0" type="stmt"/>
-      <line num="14" count="0" type="stmt"/>
-      <line num="18" count="1" type="stmt"/>
-      <line num="20" count="0" type="stmt"/>
-      <line num="24" count="1" type="stmt"/>
-      <line num="26" count="0" type="stmt"/>
-    </file>
+<coverage generated="1629110873931" clover="3.2.0">
+  <project timestamp="1629110873932" name="All files">
+    <metrics statements="15" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="6" elements="26" coveredelements="21" complexity="0" loc="15" ncloc="15" packages="2" files="2" classes="2"/>
+    <package name="components">
+      <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <file name="Dogs.vue" path="/home/thanhnguyen/bizfly/vue-jest/src/components/Dogs.vue">
+        <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="37" count="4" type="stmt"/>
+        <line num="53" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="57" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="store.modules">
+      <metrics statements="9" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="4"/>
+      <file name="dogs.js" path="/home/thanhnguyen/bizfly/vue-jest/src/store/modules/dogs.js">
+        <metrics statements="9" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>

@@ -1,26 +1,17 @@
-import { shallowMount } from "@vue/test-utils"
+import { shallowMount } from '@vue/test-utils'
 import TodoList from '@/components/TodoList'
 import Todo from '@/components/Todo'
 
 describe('TodoList', () => {
-
   let wrapper
   beforeEach(() => {
-    wrapper = shallowMount(TodoList)
+    wrapper = shallowMount(TodoList, {
+      
+    })
   })
 
   afterEach(() => {
     wrapper.destroy()
-  })
-
-  it('Render the title', () => {
-    const listName = 'Title'
-    wrapper = shallowMount(TodoList, {
-      propsData: {
-        listName: listName
-      }
-    })
-    expect(wrapper.find('h1').text()).toContain(listName)
   })
   it('Render a list', () => {
     const wrapper = shallowMount(TodoList)
